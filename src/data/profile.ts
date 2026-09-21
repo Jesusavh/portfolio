@@ -7,12 +7,12 @@ import { ik } from '~/constants';
  * - Los iconos usan el set Tabler (https://tabler.io/icons).
  */
 export const profile = {
-  name: 'Luciana Martínez',
+  name: 'Estefany Vivas',
   handle: '@lucreates',
   role: 'Social Media Manager · Content Creator',
-  city: 'Caracas, Venezuela',
+  city: 'El Tigre, Venezuela',
   bio: 'Ayudo a marcas a conectar de verdad con su audiencia: estrategia de contenido, community management, edición de reels y campañas de Meta Ads que generan resultados medibles.',
-  photoUrl: ik('portfolio/perfil.jpg', { w: 600 }),
+  photoUrl: ik('estefanyv.jpg', { w: 600 }),
   availableLabel: 'Disponible para nuevos proyectos',
 };
 

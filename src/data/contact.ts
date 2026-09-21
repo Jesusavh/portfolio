@@ -5,7 +5,7 @@
  * - `agendaHref`: enlace a tu agenda (Calendly, Cal.com, WhatsApp…).
  */
 export const contact = {
-  whatsappNumber: '584120000000',
+  whatsappNumber: '+584248672859',
   agendaHref: 'https://calendly.com/tu-usuario/llamada-estrategica',
   email: 'hola@tudominio.com',
 };

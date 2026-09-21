@@ -9,11 +9,11 @@
  * Todas las imágenes y vídeos del sitio se sirven desde ImageKit con
  * transformaciones al vuelo (formato/calidad adaptativas).
  */
-export const imagekitId = 'tu-id-de-imagekit';
+export const imagekitId = 'zxcnh2alc';
 
 export const imagekitBase =
-  imagekitId === 'tu-id-de-imagekit'
-    ? 'https://ik.imagekit.io/tu-id-de-imagekit'
+  imagekitId === 'zxcnh2alc'
+    ? 'https://ik.imagekit.io/zxcnh2alc'
     : `https://ik.imagekit.io/${imagekitId}`;
 
 export interface IkOptions {

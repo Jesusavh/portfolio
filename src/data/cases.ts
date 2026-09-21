@@ -22,7 +22,7 @@ export const cases: CaseStudy[] = [
     sector: 'Gastronomía',
     summary:
       'Gestión integral de redes + campañas de Meta Ads para el lanzamiento de la nueva sucursal. Rebranding de contenido y calendario editorial.',
-    media: { type: 'video', path: 'portfolio/cliente-1/reel.mp4', alt: 'Reel promocional de Café Aurora' },
+    media: { type: 'video', path: 'Jim_Martinez_video_no_watermark.mp4', alt: 'Reel promocional de Café Aurora' },
     kpis: [
       { label: 'Alcance prom.', value: '1.2M' },
       { label: 'Engagement', value: '8.4%' },

@@ -31,7 +31,7 @@ export const footerData = {
     { ariaLabel: 'TikTok', icon: 'tabler:brand-tiktok', href: 'https://tiktok.com/@tu-perfil' },
     { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://linkedin.com/in/tu-perfil' },
     { ariaLabel: 'YouTube', icon: 'tabler:brand-youtube', href: 'https://youtube.com/@tu-perfil' },
-    { ariaLabel: 'WhatsApp', icon: 'tabler:brand-whatsapp', href: 'https://wa.me/584120000000' },
+    { ariaLabel: 'WhatsApp', icon: 'tabler:brand-whatsapp', href: 'https://wa.me/584248672859' },
   ],
   footNote: 'Social Media & Community Management · Hecho con ♥',
 };
