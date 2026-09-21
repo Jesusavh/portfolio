@@ -1,0 +1,104 @@
+---
+import { ik } from '~/constants';
+
+/**
+ * Marco de smartphone responsive para feeds de Instagram o reels verticales.
+ * - Imágenes: lazy loading nativo + ImageKit.
+ * - Vídeos: el `src` solo se asigna cuando el mockup se acerca al viewport
+ *   (IntersectionObserver), después autoplay/muted/loop.
+ */
+interface Props {
+  media: { type: 'image' | 'video'; path: string; alt?: string };
+  className?: string;
+}
+
+const { media, className = '' } = Astro.props;
+
+const width = 720;
+const videoUrl = ik(media.path, { w: width });
+const imageUrl = ik(media.path, { w: width });
+---
+
+<aw-lazy-video>
+  <div
+    class:list={[
+      'relative mx-auto w-[218px] sm:w-[248px] aspect-[9/19] rounded-[2.6rem] bg-neutral-900 p-[10px] shadow-2xl ring-1 ring-black/10 dark:ring-white/10',
+      className,
+    ]}
+  >
+    <span class="absolute -left-[3px] top-24 h-10 w-[3px] rounded-l-md bg-neutral-700" aria-hidden="true"></span>
+    <span class="absolute -left-[3px] top-36 h-14 w-[3px] rounded-l-md bg-neutral-700" aria-hidden="true"></span>
+    <span class="absolute -right-[3px] top-28 h-12 w-[3px] rounded-r-md bg-neutral-700" aria-hidden="true"></span>
+    <div class="relative h-full w-full overflow-hidden rounded-[2.1rem] bg-black/5 dark:bg-black">
+      {
+        media.type === 'video' ? (
+          <video
+            data-src={videoUrl}
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="none"
+            tabindex="-1"
+            aria-hidden="true"
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+        ) : (
+          <img
+            src={imageUrl}
+            alt={media.alt}
+            loading="lazy"
+            decoding="async"
+            width={width}
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+        )
+      }
+      <span
+        class="absolute left-1/2 top-[7px] h-[22px] w-[86px] -translate-x-1/2 rounded-full bg-neutral-800"
+        aria-hidden="true"></span>
+      <span
+        class="absolute bottom-1.5 left-1/2 h-[4px] w-24 -translate-x-1/2 rounded-full bg-white/70"
+        aria-hidden="true"></span>
+    </div>
+  </div>
+</aw-lazy-video>
+
+<style>
+  aw-lazy-video {
+    display: block;
+  }
+</style>
+
+<script>
+  // Carga diferida de vídeos: asigna el `src` solo cuando el mockup está cerca
+  // de entrar al viewport y respeta `prefers-reduced-motion`.
+  class AwLazyVideo extends HTMLElement {
+    connectedCallback() {
+      const video = this.querySelector('video');
+      if (!video) return;
+
+      const load = () => {
+        if (!video.hasAttribute('src') && video.dataset.src) {
+          video.setAttribute('src', video.dataset.src);
+          video.load();
+        }
+        observer?.disconnect();
+      };
+
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!('IntersectionObserver' in window) || reduced.matches) return load();
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) load();
+        },
+        { rootMargin: '300px' }
+      );
+      observer.observe(this);
+      document.addEventListener('astro:after-swap', load, { once: true });
+    }
+  }
+
+  if (!customElements.get('aw-lazy-video')) customElements.define('aw-lazy-video', AwLazyVideo);
+</script>

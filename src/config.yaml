@@ -1,0 +1,44 @@
+site:
+  name: 'Luciana'
+  site: 'https://tu-dominio.vercel.app'
+  base: '/'
+  trailingSlash: false
+
+  googleSiteVerificationId: false
+
+# Default SEO metadata
+metadata:
+  title:
+    default: 'Luciana · Social Media & Community Management'
+    template: '%s — Luciana'
+  description: 'Portafolio de Social Media, Community Management y Creación de Contenido. Estrategia digital, reels, Meta Ads y auditorías que generan resultados medibles.'
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: 'Luciana · Social Media & Community Management'
+    images:
+      - url: '~/assets/images/default.png'
+        width: 1200
+        height: 628
+    type: website
+  twitter:
+    handle: '@lucreates'
+    site: '@lucreates'
+    cardType: summary_large_image
+
+i18n:
+  language: es
+  textDirection: ltr
+
+apps:
+  blog:
+    isEnabled: false
+
+analytics:
+  vendors:
+    googleAnalytics:
+      id: null # or "G-XXXXXXXXXX"
+
+ui:
+  theme: 'light' # Valores: "system" | "light" | "dark" | "light:only" | "dark:only"

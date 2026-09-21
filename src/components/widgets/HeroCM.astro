@@ -1,0 +1,118 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from '~/components/ui/Button.astro';
+import { profile, socialLinks } from '~/data/profile';
+import { whatsappLink } from '~/data/contact';
+
+/**
+ * Hero de marca personal: foto, título, bio, CTA a WhatsApp/agenda y
+ * enlaces sociales. La foto se sirve desde ImageKit con lazy loading.
+ */
+interface Props {
+  id?: string;
+  badge?: string;
+}
+
+const { id, badge = profile.availableLabel } = Astro.props;
+---
+
+<section id={id ?? 'inicio'} class="relative not-prose overflow-hidden">
+  <div class="absolute inset-0 pointer-events-none -z-[1]" aria-hidden="true">
+    <div
+      class="absolute inset-0 bg-[radial-gradient(55%_45%_at_18%_0%,rgb(244_114_182/0.22),transparent_60%),radial-gradient(45%_40%_at_92%_18%,rgb(251_191_36/0.14),transparent_60%)] dark:bg-[radial-gradient(55%_45%_at_18%_0%,rgb(190_24_93/0.28),transparent_60%),radial-gradient(45%_40%_at_92%_18%,rgb(180_83_9/0.16),transparent_60%)]"
+    >
+    </div>
+  </div>
+
+  <div class="mx-auto w-full max-w-7xl px-4 sm:px-6 md:pt-[76px]">
+    <div class="grid items-center gap-12 py-12 md:grid-cols-[1.15fr_0.85fr] md:gap-8 md:py-20 lg:py-24">
+      <div class="text-center md:text-left">
+        {
+          badge && (
+            <span class="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary dark:bg-primary/20 dark:text-pink-100 intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+              <span class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75" />
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-primary" />
+              </span>
+              {badge}
+            </span>
+          )
+        }
+
+        <h1
+          class="font-heading text-4xl font-bold leading-tighter tracking-tighter text-heading sm:text-5xl xl:text-6xl intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+        >
+          Hola, soy <span class="text-accent">{profile.name}</span>
+        </h1>
+
+        <p
+          class="mt-4 text-xl font-medium text-secondary sm:text-2xl intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+          set:html={profile.role}
+        />
+
+        <p
+          class="mx-auto mt-6 max-w-xl text-lg text-muted dark:text-slate-300 md:mx-0 intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+        >
+          {profile.bio}
+        </p>
+
+        <div
+          class="mt-8 flex flex-col items-center gap-4 sm:flex-row md:justify-start sm:justify-center intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+        >
+          <Button
+            variant="primary"
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            icon="tabler:brand-whatsapp"
+            class="w-full sm:w-auto"
+          >
+            Hablemos por WhatsApp
+          </Button>
+          <Button variant="secondary" href="/#casos" class="w-full sm:w-auto"> Ver casos de éxito </Button>
+        </div>
+
+        <ul
+          class="mt-8 flex items-center justify-center gap-2 md:justify-start intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+        >
+          {
+            socialLinks.map(({ label, icon, href }) => (
+              <li>
+                <a
+                  class="inline-flex items-center rounded-full p-2.5 text-muted transition hover:bg-primary/10 hover:text-primary dark:hover:bg-primary/20 dark:hover:text-pink-100"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                >
+                  <Icon name={icon} class="h-6 w-6" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div class="relative mx-auto intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+        <div
+          class="absolute inset-0 -z-[1] translate-x-6 translate-y-6 rounded-full bg-accent/25 blur-3xl dark:bg-accent/20"
+          aria-hidden="true"
+        >
+        </div>
+        <div
+          class="mx-auto aspect-square w-56 overflow-hidden rounded-full border-[6px] border-white bg-primary/10 shadow-2xl ring-1 ring-primary/20 sm:w-64 lg:w-72 dark:border-slate-800"
+        >
+          <img
+            src={profile.photoUrl}
+            alt={`Foto de perfil de ${profile.name}`}
+            loading="lazy"
+            decoding="async"
+            width={600}
+            height={600}
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

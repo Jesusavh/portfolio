@@ -1,0 +1,100 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import HeroCM from '~/components/widgets/HeroCM.astro';
+import CaseStudies from '~/components/widgets/CaseStudies.astro';
+import Features from '~/components/widgets/Features.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import StructuredData from '~/components/common/StructuredData.astro';
+
+import { services } from '~/data/services';
+import { stats } from '~/data/stats';
+import { contact, whatsappLink } from '~/data/contact';
+import { profile } from '~/data/profile';
+
+import { SITE, METADATA, I18N } from 'astrowind:config';
+import favIconSvg from '~/assets/favicons/favicon.svg';
+
+const metadata = {
+  title: profile.name,
+  ignoreTitleTemplate: true,
+  description: `Portafolio de Social Media, Community Management y Creación de Contenido — ${profile.handle}`,
+};
+
+// Structured data for the site and its publisher, built only from
+// `src/config.yaml` and `src/data/profile.ts`.
+const organizationId = `${SITE?.site}/#organization`;
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE?.site}/#website`,
+    name: SITE?.name,
+    url: SITE?.site,
+    inLanguage: I18N?.language,
+    publisher: { '@id': organizationId },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': organizationId,
+    name: SITE?.name,
+    url: SITE?.site,
+    logo: new URL(favIconSvg.src, SITE?.site).toString(),
+    ...(METADATA?.twitter?.handle ? { sameAs: [`https://x.com/${METADATA.twitter.handle.replace(/^@/, '')}`] } : {}),
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <StructuredData slot="head" schema={structuredData} />
+
+  <!-- Hero: presentación personal -->
+  <HeroCM />
+
+  <!-- Casos de éxito / contenido -->
+  <CaseStudies />
+
+  <!-- Servicios -->
+  <Features
+    id="servicios"
+    tagline="Servicios"
+    title="Cómo puedo ayudarte a crecer"
+    subtitle="Estrategia, contenido y pauta: todo lo que tu marca necesita para destacar en redes."
+    columns={4}
+    items={services.map((service) => ({
+      icon: service.icon,
+      title: service.title,
+      description: service.description,
+    }))}
+  />
+
+  <!-- Métricas globales -->
+  <Stats id="resultados" countUp stats={stats.map(({ amount, title }) => ({ amount, title }))} />
+
+  <!-- CTA final -->
+  <CallToAction
+    id="contacto"
+    layout="banner"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Hablemos por WhatsApp',
+        href: whatsappLink,
+        target: '_blank',
+        icon: 'tabler:brand-whatsapp',
+      },
+      {
+        text: 'Agenda una llamada',
+        href: contact.agendaHref,
+        target: '_blank',
+      },
+    ]}
+  >
+    <Fragment slot="title">¿Lista para hacer crecer tu marca?</Fragment>
+    <Fragment slot="subtitle">
+      Cuéntame tu proyecto y armemos juntos una estrategia que convierta. Primera llamada sin compromiso.
+    </Fragment>
+  </CallToAction>
+</Layout>

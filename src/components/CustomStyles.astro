@@ -1,0 +1,51 @@
+---
+// Font family is provided by Astro's native Fonts API (see `fonts` in
+// astro.config.ts and <Font /> in Layout.astro), exposed as `--font-inter`.
+// To switch typefaces, change the `fonts` entry and repoint `--aw-font-*` below.
+
+// Paleta pastel cálida para marca personal creativa: rosa, crema y neutros.
+// Dark mode en tonos ciruela profundos.
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: var(--font-inter);
+    --aw-font-serif: var(--font-inter);
+    --aw-font-heading: var(--font-inter);
+
+    --aw-color-primary: rgb(219 88 122);
+    --aw-color-secondary: rgb(188 58 96);
+    --aw-color-accent: rgb(233 152 66);
+
+    --aw-color-text-heading: rgb(46 25 34);
+    --aw-color-text-default: rgb(62 40 51);
+    --aw-color-text-muted: rgb(62 40 51 / 66%);
+    --aw-color-bg-page: rgb(255 249 246);
+    --aw-color-bg-page-dark: rgb(26 17 23);
+
+    ::selection {
+      background-color: rgb(219 88 122 / 22%);
+    }
+  }
+
+  .dark {
+    --aw-font-sans: var(--font-inter);
+    --aw-font-serif: var(--font-inter);
+    --aw-font-heading: var(--font-inter);
+
+    --aw-color-primary: rgb(244 145 175);
+    --aw-color-secondary: rgb(236 106 148);
+    --aw-color-accent: rgb(250 187 127);
+
+    --aw-color-text-heading: rgb(248 242 244);
+    --aw-color-text-default: rgb(233 220 226);
+    --aw-color-text-muted: rgb(233 220 226 / 66%);
+    --aw-color-bg-page: rgb(26 17 23);
+    --aw-color-bg-page-dark: rgb(18 11 16);
+
+    ::selection {
+      background-color: rgb(244 145 175 / 24%);
+      color: snow;
+    }
+  }
+</style>
