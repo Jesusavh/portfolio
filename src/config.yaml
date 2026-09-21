@@ -1,6 +1,6 @@
 site:
   name: 'Luciana'
-  site: 'https://tu-dominio.vercel.app'
+  site: 'https://portfolio-estefany-vivas.vercel.app'
   base: '/'
   trailingSlash: false
 
