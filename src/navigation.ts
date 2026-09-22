@@ -5,6 +5,7 @@ export const headerData = {
   links: [
     { text: 'Inicio', href: getPermalink('/#inicio') },
     { text: 'Casos', href: getPermalink('/#casos') },
+    { text: 'Experiencia', href: getPermalink('/#experiencia') },
     { text: 'Servicios', href: getPermalink('/#servicios') },
     { text: 'Resultados', href: getPermalink('/#resultados') },
     { text: 'Contacto', href: getPermalink('/#contacto') },
@@ -20,6 +21,7 @@ export const footerData = {
       links: [
         { text: 'Inicio', href: getPermalink('/#inicio') },
         { text: 'Casos de éxito', href: getPermalink('/#casos') },
+        { text: 'Experiencia', href: getPermalink('/#experiencia') },
         { text: 'Servicios', href: getPermalink('/#servicios') },
         { text: 'Resultados', href: getPermalink('/#resultados') },
       ],

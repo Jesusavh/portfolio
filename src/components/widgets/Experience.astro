@@ -1,0 +1,54 @@
+---
+import { Icon } from 'astro-icon/components';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import { experience } from '~/data/experience';
+
+/**
+ * Experiencia laboral: grid de tarjetas con las marcas gestionadas,
+ * el rubro de cada una y el alcance del trabajo realizado.
+ */
+interface Props {
+  id?: string;
+  tagline?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+const { id = 'experiencia', tagline = 'Experiencia', title, subtitle } = Astro.props;
+---
+
+<WidgetWrapper id={id} containerClass="max-w-6xl">
+  <Headline
+    tagline={tagline}
+    title={title ?? 'Marcas que confiaron en mí'}
+    subtitle={subtitle ?? 'Gestión integral de redes y contenido para negocios de distintos rubros.'}
+  />
+
+  <div class="mx-auto grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {
+      experience.map(({ company, sector, icon, description }, index) => (
+        <article
+          class="rounded-3xl bg-white/70 p-6 shadow-sm ring-1 ring-black/5 sm:p-7 dark:bg-slate-900/50 dark:ring-white/10 intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+          style={`animation-delay: ${(index % 3) * 90}ms`}
+        >
+          <div class="flex items-center gap-3">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary text-white">
+              <Icon name={icon} class="h-6 w-6" />
+            </span>
+            <div class="min-w-0">
+              <h3 class="truncate font-heading text-lg font-bold tracking-tight text-heading dark:text-white">
+                {company}
+              </h3>
+              <span class="rounded-full bg-primary/10 px-2.5 py-0.5 text-[0.7rem] font-semibold uppercase tracking-wide text-primary dark:bg-primary/20 dark:text-pink-100">
+                {sector}
+              </span>
+            </div>
+          </div>
+
+          <p class="mt-4 text-sm leading-relaxed text-muted dark:text-slate-300">{description}</p>
+        </article>
+      ))
+    }
+  </div>
+</WidgetWrapper>

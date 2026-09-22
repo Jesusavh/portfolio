@@ -1,0 +1,125 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from '~/components/ui/Button.astro';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import { services } from '~/data/services';
+import { whatsappLink } from '~/data/contact';
+
+/**
+ * Servicios: grilla estilo pricing con el desglose de entregables de cada
+ * servicio. Los servicios sin `price` se muestran como "A medida" con
+ * cotización personalizada; los que tienen `highlight` se resaltan como
+ * plan destacado.
+ */
+interface Props {
+  id?: string;
+  tagline?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+const { id = 'servicios', tagline = 'Servicios', title, subtitle } = Astro.props;
+---
+
+<WidgetWrapper id={id} containerClass="max-w-6xl">
+  <Headline
+    tagline={tagline}
+    title={title ?? 'Cómo puedo ayudarte a crecer'}
+    subtitle={subtitle ?? 'Elige el plan que tu marca necesita: cada uno incluye un desglose claro de entregables.'}
+  />
+
+  <div class="flex flex-wrap justify-center gap-6">
+    {
+      services.map(
+        (
+          { icon, title: serviceTitle, tagline: serviceTagline, badge, highlight, price, period, note, items },
+          index
+        ) => (
+          <div
+            class="flex w-full flex-col sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+            style={`animation-delay: ${(index % 3) * 90}ms`}
+          >
+            <div
+              class:list={[
+                'flex h-full flex-col rounded-3xl bg-white/70 p-6 shadow-sm ring-1 backdrop-blur sm:p-8 dark:bg-slate-900/50',
+                highlight ? 'ring-2 ring-primary dark:ring-primary/70' : 'ring-black/5 dark:ring-white/10',
+              ]}
+            >
+              {badge && (
+                <span
+                  class:list={[
+                    'mb-4 inline-flex w-fit items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide',
+                    highlight ? 'bg-primary text-white' : 'bg-black/5 text-muted dark:bg-white/10 dark:text-slate-300',
+                  ]}
+                >
+                  {badge}
+                </span>
+              )}
+
+              <div class="flex items-center gap-3">
+                <span
+                  class:list={[
+                    'flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-white',
+                    highlight ? 'bg-primary' : 'bg-primary/80',
+                  ]}
+                >
+                  <Icon name={icon} class="h-6 w-6" />
+                </span>
+                <h3 class="font-heading text-xl font-bold tracking-tight text-heading dark:text-white">
+                  {serviceTitle}
+                </h3>
+              </div>
+
+              <p class="mt-2 text-sm text-muted dark:text-slate-300">{serviceTagline}</p>
+
+              <div class="mt-6 border-t border-black/5 pt-6 dark:border-white/10">
+                {price ? (
+                  <div>
+                    <div class="flex flex-wrap items-baseline gap-2">
+                      <span class="font-heading text-4xl font-extrabold tracking-tight text-heading dark:text-white">
+                        {price}
+                      </span>
+                      {period && <span class="text-sm text-muted">{period}</span>}
+                    </div>
+                    {note && <p class="mt-2 text-xs text-muted">{note}</p>}
+                  </div>
+                ) : (
+                  <div>
+                    <span class="font-heading text-3xl font-extrabold tracking-tight text-primary dark:text-pink-200">
+                      A medida
+                    </span>
+                    <p class="mt-1 text-sm text-muted">Cotización personalizada según alcance</p>
+                  </div>
+                )}
+              </div>
+
+              <ul class="mt-6 flex-1 space-y-3">
+                {items.map((item) => (
+                  <li class="flex items-start gap-3">
+                    <span class="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary dark:bg-primary/25 dark:text-pink-100">
+                      <Icon name="tabler:check" class="h-3.5 w-3.5" />
+                    </span>
+                    <span class="text-sm text-default dark:text-slate-200">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="mt-8">
+                <Button
+                  variant={highlight || price ? 'primary' : 'secondary'}
+                  href={whatsappLink}
+                  target="_blank"
+                  icon="tabler:arrow-right"
+                  class="w-full"
+                >
+                  {highlight ? 'Cotizar este plan' : price ? 'Reservar este servicio' : 'Cotizar este servicio'}
+                </Button>
+              </div>
+            </div>
+          </div>
+        )
+      )
+    }
+  </div>
+</WidgetWrapper>

@@ -3,12 +3,12 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import HeroCM from '~/components/widgets/HeroCM.astro';
 import CaseStudies from '~/components/widgets/CaseStudies.astro';
-import Features from '~/components/widgets/Features.astro';
+import Experience from '~/components/widgets/Experience.astro';
+import ServicesPricing from '~/components/widgets/ServicesPricing.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 
-import { services } from '~/data/services';
 import { stats } from '~/data/stats';
 import { contact, whatsappLink } from '~/data/contact';
 import { profile } from '~/data/profile';
@@ -56,19 +56,11 @@ const structuredData = [
   <!-- Casos de éxito / contenido -->
   <CaseStudies />
 
+  <!-- Experiencia laboral -->
+  <Experience />
+
   <!-- Servicios -->
-  <Features
-    id="servicios"
-    tagline="Servicios"
-    title="Cómo puedo ayudarte a crecer"
-    subtitle="Estrategia, contenido y pauta: todo lo que tu marca necesita para destacar en redes."
-    columns={4}
-    items={services.map((service) => ({
-      icon: service.icon,
-      title: service.title,
-      description: service.description,
-    }))}
-  />
+  <ServicesPricing />
 
   <!-- Métricas globales -->
   <Stats id="resultados" countUp stats={stats.map(({ amount, title }) => ({ amount, title }))} />
