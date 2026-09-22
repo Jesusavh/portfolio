@@ -12,4 +12,4 @@ export const contact = {
 
 export const whatsappLink =
   `https://wa.me/${contact.whatsappNumber}` +
-  `?text=${encodeURIComponent('Hola, vi tu portafolio y quiero llevar mis redes al siguiente nivel 🚀')}`;
+  `?text=${encodeURIComponent('Hola, vi tu portafolio y me gustaría conversar sobre una posible colaboración.')}`;

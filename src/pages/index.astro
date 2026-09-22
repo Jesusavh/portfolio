@@ -10,7 +10,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 
 import { stats } from '~/data/stats';
-import { contact, whatsappLink } from '~/data/contact';
+import { whatsappLink } from '~/data/contact';
 import { profile } from '~/data/profile';
 
 import { SITE, METADATA, I18N } from 'astrowind:config';
@@ -63,7 +63,7 @@ const structuredData = [
   <ServicesPricing />
 
   <!-- Métricas globales -->
-  <Stats id="resultados" countUp stats={stats.map(({ amount, title }) => ({ amount, title }))} />
+  <!-- <Stats id="resultados" countUp stats={stats.map(({ amount, title }) => ({ amount, title }))} /> -->
 
   <!-- CTA final -->
   <CallToAction
@@ -77,16 +77,16 @@ const structuredData = [
         target: '_blank',
         icon: 'tabler:brand-whatsapp',
       },
-      {
-        text: 'Agenda una llamada',
-        href: contact.agendaHref,
-        target: '_blank',
-      },
+      // {
+      //   text: 'Agenda una llamada',
+      //   href: contact.agendaHref,
+      //   target: '_blank',
+      // },
     ]}
   >
     <Fragment slot="title">¿Lista para hacer crecer tu marca?</Fragment>
     <Fragment slot="subtitle">
-      Cuéntame tu proyecto y armemos juntos una estrategia que convierta. Primera llamada sin compromiso.
+      Cuéntame tu proyecto y armemos juntos una estrategia que lleve tu marca al siguiente nivel.
     </Fragment>
   </CallToAction>
 </Layout>

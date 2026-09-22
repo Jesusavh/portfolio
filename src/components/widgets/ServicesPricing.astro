@@ -1,13 +1,15 @@
 ---
+import Button from '~/components/ui/Button.astro';
 import Headline from '~/components/ui/Headline.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import Carousel from '~/components/ui/Carousel.astro';
 import ServiceCard from '~/components/widgets/ServiceCard.astro';
 import { videoPlans, services } from '~/data/services';
+import { whatsappLink } from '~/data/contact';
 
 /**
  * Servicios: los planes de producción/edición de video se muestran
- * destacados arriba y el resto de servicios en un carrusel debajo.
+ * destacados arriba y el resto de servicios en un grid 2x2 debajo,
+ * seguido de un banner de llamado a la acción unificado.
  */
 interface Props {
   id?: string;
@@ -40,21 +42,38 @@ const { id = 'servicios', tagline = 'Servicios', title, subtitle } = Astro.props
     }
   </div>
 
-  <!-- Otros servicios (carrusel) -->
+  <!-- Otros servicios (grid 2x2) -->
   <div class="mt-16">
     <div class="mb-8 flex items-center gap-4">
       <h3 class="font-heading text-2xl font-bold tracking-tight text-heading dark:text-white">Otros servicios</h3>
       <span class="h-px flex-1 bg-black/10 dark:bg-white/10" aria-hidden="true"></span>
     </div>
 
-    <Carousel ariaLabel="Otros servicios">
+    <div class="grid gap-6 md:grid-cols-2">
       {
-        services.map((service) => (
-          <div class="flex w-[300px] shrink-0 snap-center sm:w-[340px]" data-carousel-item>
+        services.map((service, index) => (
+          <div
+            class="h-full intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+            style={`animation-delay: ${(index % 2) * 90}ms`}
+          >
             <ServiceCard service={service} />
           </div>
         ))
       }
-    </Carousel>
+    </div>
+  </div>
+
+  <!-- Banner CTA unificado -->
+  <div
+    class="mt-12 rounded-3xl bg-white/70 p-8 text-center shadow-sm ring-1 ring-black/5 sm:p-10 dark:bg-slate-900/50 dark:ring-white/10"
+  >
+    <p class="text-lg font-medium text-heading dark:text-white">
+      ¿Buscas una propuesta integral o combinar varios de estos servicios para tu marca?
+    </p>
+    <div class="mt-6 flex justify-center">
+      <Button variant="primary" href={whatsappLink} target="_blank" icon="tabler:arrow-right">
+        Armemos un plan a tu medida
+      </Button>
+    </div>
   </div>
 </WidgetWrapper>
