@@ -1,0 +1,39 @@
+---
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Carousel from '~/components/ui/Carousel.astro';
+import PhoneMockup from '~/components/widgets/PhoneMockup.astro';
+import { workVideos } from '~/data/work';
+
+/**
+ * Trabajo reciente: carrusel de mockups de celular con videos/reels.
+ * Cada entrada de `workVideos` genera automáticamente un mockup.
+ */
+interface Props {
+  id?: string;
+  tagline?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+const { id = 'trabajo', tagline = 'Trabajo reciente', title, subtitle } = Astro.props;
+---
+
+<WidgetWrapper id={id} containerClass="max-w-6xl">
+  <Headline
+    tagline={tagline}
+    title={title ?? 'Un vistazo a mi contenido'}
+    subtitle={subtitle ?? 'Reels y videos que he producido. Cada link de video genera un mockup automáticamente.'}
+  />
+
+  <Carousel ariaLabel="Videos y reels">
+    {
+      workVideos.map(({ path, alt, caption }) => (
+        <figure class="shrink-0 snap-center" data-carousel-item>
+          <PhoneMockup media={{ type: 'video', path, alt }} />
+          {caption && <figcaption class="mt-4 text-center text-sm text-muted">{caption}</figcaption>}
+        </figure>
+      ))
+    }
+  </Carousel>
+</WidgetWrapper>

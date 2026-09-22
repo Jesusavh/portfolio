@@ -1,0 +1,74 @@
+---
+import { Icon } from 'astro-icon/components';
+
+/**
+ * Carrusel horizontal reutilizable (scroll-snap + flechas).
+ * - Los hijos del slot deben llevar `data-carousel-item` y las clases
+ *   `shrink-0 snap-center` para que el scroll avance por elemento.
+ */
+interface Props {
+  ariaLabel?: string;
+}
+
+const { ariaLabel = 'Carrusel' } = Astro.props;
+---
+
+<aw-carousel class="relative">
+  <div
+    data-track
+    role="list"
+    aria-label={ariaLabel}
+    class="mx-auto flex w-fit max-w-full snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4"
+  >
+    <slot />
+  </div>
+
+  <button
+    type="button"
+    data-prev
+    aria-label="Anterior"
+    class="absolute left-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/90 text-muted shadow-lg transition hover:scale-105 hover:text-primary dark:border-white/10 dark:bg-slate-900/90 dark:text-slate-300"
+  >
+    <Icon name="tabler:chevron-left" class="h-6 w-6" />
+  </button>
+  <button
+    type="button"
+    data-next
+    aria-label="Siguiente"
+    class="absolute right-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-black/10 bg-white/90 text-muted shadow-lg transition hover:scale-105 hover:text-primary dark:border-white/10 dark:bg-slate-900/90 dark:text-slate-300"
+  >
+    <Icon name="tabler:chevron-right" class="h-6 w-6" />
+  </button>
+</aw-carousel>
+
+<script>
+  class AwCarousel extends HTMLElement {
+    connectedCallback() {
+      const track = this.querySelector('[data-track]');
+      const prev = this.querySelector('[data-prev]');
+      const next = this.querySelector('[data-next]');
+      if (!track) return;
+
+      const update = () => {
+        const scrollable = track.scrollWidth > track.clientWidth + 1;
+        prev?.classList.toggle('hidden', !scrollable);
+        next?.classList.toggle('hidden', !scrollable);
+      };
+
+      // gap-6 = 24px
+      const amount = () => {
+        const item = this.querySelector('[data-carousel-item]');
+        return item ? item.getBoundingClientRect().width + 24 : track.clientWidth * 0.8;
+      };
+
+      prev?.addEventListener('click', () => track.scrollBy({ left: -amount(), behavior: 'smooth' }));
+      next?.addEventListener('click', () => track.scrollBy({ left: amount(), behavior: 'smooth' }));
+
+      update();
+      window.addEventListener('resize', update, { passive: true });
+      document.addEventListener('astro:after-swap', update, { once: true });
+    }
+  }
+
+  if (!customElements.get('aw-carousel')) customElements.define('aw-carousel', AwCarousel);
+</script>

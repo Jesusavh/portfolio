@@ -4,7 +4,7 @@ import { getPermalink } from './utils/permalinks';
 export const headerData = {
   links: [
     { text: 'Inicio', href: getPermalink('/#inicio') },
-    { text: 'Casos', href: getPermalink('/#casos') },
+    { text: 'Trabajo', href: getPermalink('/#trabajo') },
     { text: 'Experiencia', href: getPermalink('/#experiencia') },
     { text: 'Servicios', href: getPermalink('/#servicios') },
     { text: 'Resultados', href: getPermalink('/#resultados') },
@@ -20,7 +20,7 @@ export const footerData = {
       title: 'Secciones',
       links: [
         { text: 'Inicio', href: getPermalink('/#inicio') },
-        { text: 'Casos de éxito', href: getPermalink('/#casos') },
+        { text: 'Trabajo reciente', href: getPermalink('/#trabajo') },
         { text: 'Experiencia', href: getPermalink('/#experiencia') },
         { text: 'Servicios', href: getPermalink('/#servicios') },
         { text: 'Resultados', href: getPermalink('/#resultados') },

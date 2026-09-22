@@ -22,7 +22,11 @@ export interface Service {
   items: string[];
 }
 
-export const services: Service[] = [
+/**
+ * Planes de producción/edición de video: se muestran destacados arriba,
+ * como la oferta principal de la sección.
+ */
+export const videoPlans: Service[] = [
   {
     icon: 'tabler:scissors',
     title: 'Edición de Reels y TikToks',
@@ -60,6 +64,10 @@ export const services: Service[] = [
       'Entrega lista para publicar + portada',
     ],
   },
+];
+
+/** Otros servicios: se muestran en un carrusel debajo de los planes de video. */
+export const services: Service[] = [
   {
     icon: 'tabler:messages',
     title: 'Atención de Mensajes & Social Care',
