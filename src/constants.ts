@@ -6,8 +6,10 @@
  * 3. Reemplaza `tu-id-de-imagekit` por tu ImageKit ID público
  *    (lo encuentras en Dashboard → URL endpoints).
  *
- * Todas las imágenes y vídeos del sitio se sirven desde ImageKit con
- * transformaciones al vuelo (formato/calidad adaptativas).
+ * Las imágenes se sirven desde ImageKit con transformaciones al vuelo
+ * (formato/calidad adaptativas). Los vídeos se sirven SIEMPRE de forma
+ * directa (sin `tr=`) para no consumir el cupo gratuito de transformación
+ * de vídeo.
  */
 export const imagekitId = 'zxcnh2alc';
 
@@ -36,3 +38,10 @@ export const ik = (path: string, { w, h, q = 80, f = 'auto' }: IkOptions = {}): 
   const query = `?tr=${transforms.join(',')}`;
   return `${imagekitBase}/${path.replace(/^\/+/, '')}${query}`;
 };
+
+/**
+ * URL directa de un asset de ImageKit SIN transformaciones.
+ * Úsala para vídeos: así ImageKit sirve el archivo original (cacheado por
+ * el CDN) y no cuenta contra el cupo de transformación de vídeo.
+ */
+export const ikRaw = (path: string): string => `${imagekitBase}/${path.replace(/^\/+/, '')}`;

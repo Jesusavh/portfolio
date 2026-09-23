@@ -1,5 +1,5 @@
 ---
-import { ik } from '~/constants';
+import { ik, ikRaw } from '~/constants';
 
 /**
  * Marco de smartphone responsive para feeds de Instagram o reels verticales.
@@ -15,7 +15,8 @@ interface Props {
 const { media, className = '' } = Astro.props;
 
 const width = 720;
-const videoUrl = ik(media.path, { w: width });
+// Los vídeos se sirven directos (sin `tr=`) para no gastar transformaciones de vídeo.
+const videoUrl = ikRaw(media.path);
 const imageUrl = ik(media.path, { w: width });
 ---
 

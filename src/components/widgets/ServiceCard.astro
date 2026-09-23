@@ -50,7 +50,7 @@ const { icon, title, tagline, badge, highlight, price, period, note, ctaText, it
 
   {tagline && <p class="mt-2 text-sm text-muted dark:text-slate-300">{tagline}</p>}
 
-  <!-- <div class="mt-6 border-t border-black/5 pt-6 dark:border-white/10">
+  <div class="mt-6 border-t border-black/5 pt-6 dark:border-white/10">
     {
       price ? (
         <div>
@@ -64,11 +64,14 @@ const { icon, title, tagline, badge, highlight, price, period, note, ctaText, it
         </div>
       ) : (
         <div>
-          
+          <span class="font-heading text-3xl font-extrabold tracking-tight text-primary dark:text-pink-200">
+            A medida
+          </span>
+          <p class="mt-1 text-sm text-muted">Cotización personalizada según alcance</p>
         </div>
       )
     }
-  </div> -->
+  </div>
 
   <ul class="mt-6 flex-1 space-y-3">
     {

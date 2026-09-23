@@ -41,6 +41,12 @@ const { ariaLabel = 'Carrusel' } = Astro.props;
   </button>
 </aw-carousel>
 
+<style>
+  aw-carousel {
+    display: block;
+  }
+</style>
+
 <script>
   class AwCarousel extends HTMLElement {
     connectedCallback() {

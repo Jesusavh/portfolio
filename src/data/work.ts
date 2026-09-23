@@ -15,7 +15,12 @@ export interface WorkVideo {
 
 export const workVideos: WorkVideo[] = [
   {
-    path: 'Jim_Martinez_video_no_watermark.mp4',
+    path: 'estefany/VID_20260622_194615_767.mp4',
+    alt: 'Reel promocional',
+    caption: 'Reel promocional',
+  },
+  {
+    path: 'estefany/2026-05-25-163846387.mp4',
     alt: 'Reel promocional',
     caption: 'Reel promocional',
   },

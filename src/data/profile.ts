@@ -8,11 +8,11 @@ import { ik } from '~/constants';
  */
 export const profile = {
   name: 'Estefany Vivas',
-  handle: '@lucreates',
+  handle: '@estefanyvivas',
   role: 'Social Media Manager · Content Creator',
   city: 'El Tigre, Venezuela',
   bio: 'Ayudo a marcas a conectar de verdad con su audiencia: estrategia de contenido, community management, edición de reels y campañas de Meta Ads que generan resultados medibles.',
-  photoUrl: ik('estefanyv.jpg', { w: 600 }),
+  photoUrl: ik('estefany/20260205_171113.jpg', { w: 600 }),
   availableLabel: 'Disponible para nuevos proyectos',
 };
 
