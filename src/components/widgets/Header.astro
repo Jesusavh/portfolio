@@ -91,7 +91,8 @@ const persistKey = `header-${Array.from(
         <a class="flex items-center" href={getHomePermalink()}>
           <Logo />
         </a>
-        <div class="flex items-center lg:hidden">
+        <div class="flex items-center gap-1 lg:hidden">
+          {showToggleTheme && <ToggleTheme iconClass="w-6 h-6" />}
           <ToggleMenu />
         </div>
       </div>

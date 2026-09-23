@@ -6,7 +6,7 @@
  * - `badge`: etiqueta del plan (p. ej. "Plan Básico" / "Plan Completo").
  * - `highlight`: resalta la tarjeta (borde y badge en color primario).
  * - `price`/`period`: si se definen, muestran un precio. Si se omiten,
- *   la tarjeta muestra "A medida" con cotización personalizada.
+ *   la tarjeta muestra una nota de cotización personalizada.
  * - `note`: línea pequeña bajo el precio.
  * - `ctaText`: si se define, muestra el botón de la tarjeta con ese texto.
  */

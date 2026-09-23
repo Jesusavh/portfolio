@@ -17,8 +17,6 @@ export const profile = {
 };
 
 export const socialLinks = [
-  { label: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://instagram.com/tu-perfil' },
-  { label: 'TikTok', icon: 'tabler:brand-tiktok', href: 'https://tiktok.com/@tu-perfil' },
-  { label: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://linkedin.com/in/tu-perfil' },
-  { label: 'YouTube', icon: 'tabler:brand-youtube', href: 'https://youtube.com/@tu-perfil' },
+  { label: 'Instagram', icon: 'tabler:brand-instagram', href: 'https://instagram.com/estefanymakeup_ve' },
+  { label: 'TikTok', icon: 'tabler:brand-tiktok', href: 'https://tiktok.com/@estefanyvh9' },
 ];

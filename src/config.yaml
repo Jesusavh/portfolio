@@ -1,5 +1,5 @@
 site:
-  name: 'Luciana'
+  name: 'Estefany Vivas'
   site: 'https://portfolio-estefany-vivas.vercel.app'
   base: '/'
   trailingSlash: false
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: 'Luciana · Social Media & Community Management'
-    template: '%s — Luciana'
+    default: 'Estefanyv · Social Media & Community Management'
+    template: '%s — Estefanyv'
   description: 'Portafolio de Social Media, Community Management y Creación de Contenido. Estrategia digital, reels, Meta Ads y auditorías que generan resultados medibles.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: 'Luciana · Social Media & Community Management'
+    site_name: 'Estefanyv · Social Media & Community Management'
     images:
       - url: '~/assets/images/default.png'
         width: 1200
