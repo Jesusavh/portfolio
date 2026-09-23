@@ -14,9 +14,7 @@
 export const imagekitId = 'zxcnh2alc';
 
 export const imagekitBase =
-  imagekitId === 'zxcnh2alc'
-    ? 'https://ik.imagekit.io/zxcnh2alc'
-    : `https://ik.imagekit.io/${imagekitId}`;
+  imagekitId === 'zxcnh2alc' ? 'https://ik.imagekit.io/zxcnh2alc' : `https://ik.imagekit.io/${imagekitId}`;
 
 export interface IkOptions {
   /** Ancho en píxeles. */

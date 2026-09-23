@@ -1,0 +1,69 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { cldVideoUrl, cldPosterUrl } from '~/utils/cloudinary';
+
+interface Props extends Omit<HTMLAttributes<'video'>, 'src' | 'poster'> {
+  /** Public ID del vídeo en Cloudinary (sin extensión). */
+  src: string;
+  /** Ancho máximo de entrega (px). Por defecto 720. */
+  width?: number;
+  /** Alto máximo de entrega (px). Opcional. */
+  height?: number;
+  /** Genera automáticamente el poster del primer fotograma. */
+  poster?: boolean;
+  /** Carga diferida: asigna el `src` solo al entrar al viewport. */
+  lazy?: boolean;
+}
+
+const { src, width = 720, height, poster = true, lazy = false, preload = 'none', ...rest } = Astro.props;
+
+const videoUrl = cldVideoUrl(src, { width, height });
+const posterUrl = poster ? cldPosterUrl(src, { width }) : undefined;
+---
+
+{
+  lazy ? (
+    <aw-lazy-video>
+      <video data-src={videoUrl} poster={posterUrl} preload={preload} {...rest} />
+    </aw-lazy-video>
+  ) : (
+    <video src={videoUrl} poster={posterUrl} preload={preload} {...rest} />
+  )
+}
+
+<style>
+  aw-lazy-video {
+    display: block;
+  }
+</style>
+
+<script>
+  class AwLazyVideo extends HTMLElement {
+    connectedCallback() {
+      const video = this.querySelector('video');
+      if (!video) return;
+
+      const load = () => {
+        if (!video.hasAttribute('src') && video.dataset.src) {
+          video.setAttribute('src', video.dataset.src);
+          video.load();
+        }
+        observer?.disconnect();
+      };
+
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!('IntersectionObserver' in window) || reduced.matches) return load();
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) load();
+        },
+        { rootMargin: '300px' }
+      );
+      observer.observe(video);
+      document.addEventListener('astro:after-swap', load, { once: true });
+    }
+  }
+
+  if (!customElements.get('aw-lazy-video')) customElements.define('aw-lazy-video', AwLazyVideo);
+</script>

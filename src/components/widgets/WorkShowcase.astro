@@ -28,9 +28,9 @@ const { id = 'trabajo', tagline = 'Trabajo reciente', title, subtitle } = Astro.
 
   <Carousel ariaLabel="Videos y reels">
     {
-      workVideos.map(({ path, alt, caption }) => (
+      workVideos.map(({ publicId, alt, caption }) => (
         <figure class="shrink-0 snap-center" data-carousel-item>
-          <PhoneMockup media={{ type: 'video', path, alt }} />
+          <PhoneMockup media={{ type: 'video', publicId, alt }} />
           {caption && <figcaption class="mt-4 text-center text-sm text-muted">{caption}</figcaption>}
         </figure>
       ))
